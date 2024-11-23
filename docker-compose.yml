@@ -1,0 +1,63 @@
+version: "3.8"
+
+services:
+  app:
+    profiles: ["app"]
+    restart: always
+    container_name: social-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PORT: ${PROJECT_PORT}
+    ports:
+      - ${PROJECT_PORT}:${PROJECT_PORT}
+    networks:
+      - social-api
+    depends_on:
+      - postgres
+    volumes:
+      - ./logs:/app/logs
+    logging:
+      driver: "local"
+
+  postgres:
+    container_name: postgres-${PROJECT_NAME}
+    image: postgres:14.5-alpine
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_ROL=${POSTGRES_ROL}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PGDATA=/data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    networks:
+      - social-api
+    restart: always
+
+  pgadmin:
+    container_name: pgadmin-${PROJECT_NAME}
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+    ports:
+      - "${PGADMIN_PORT}:80"
+    networks:
+      - social-api
+    restart: always
+
+networks:
+  social-api:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
