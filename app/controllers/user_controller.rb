@@ -39,11 +39,11 @@ class UserController < ApplicationController
   end
 
   def user_params(excluded_keys = [])
-    permitted_keys = [ :name, :email, :age, :last_name, :first_name, :password ]
+    permitted_keys = [ :name, :email, :age, :last_name, :first_name, :password, :username ]
     params.require(:user).permit(permitted_keys - excluded_keys.map(&:to_sym))
   end
 
   def user_map(user)
-    { id: user[:id], email: user[:email], first_name: user[:first_name], last_name: user[:last_name] }
+    { id: user[:id], username: user[:username], email: user[:email], first_name: user[:first_name], last_name: user[:last_name] }
   end
 end
