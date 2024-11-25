@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": ["password", "email", "first_name", "last_name", "age"],
+  "properties": {
+    "password": { "type": "string", "minLength": 3 },
+    "email": { "type": "string", "format": "email", "minLength": 3 },
+    "age": { "type": "integer", "minimum": 18 },
+    "first_name": { "type": "string", "minLength": 3 },
+    "last_name": { "type": "string", "minLength": 3 }
+  }
+}
