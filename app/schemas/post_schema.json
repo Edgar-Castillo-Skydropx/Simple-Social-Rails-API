@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "required": ["caption", "image_url", "body"],
+  "properties": {
+    "caption": { "type": "string", "minLength": 2 },
+    "image_url": { "type": "string", "minLength": 5 },
+    "body": { "type": "string", "minLength": 2 }
+  }
+}

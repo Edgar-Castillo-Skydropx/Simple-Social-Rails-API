@@ -1,5 +1,6 @@
 class UserController < ApplicationController
   before_action :validate_user_params, only: [ :create ]
+  skip_before_action :authenticate
 
   def create
     @found = User.find_by(email: params[:user][:email])
