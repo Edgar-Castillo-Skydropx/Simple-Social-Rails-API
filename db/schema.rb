@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_25_233544) do
     t.string "caption"
     t.string "image_url"
     t.string "body"
-    t.string "text"
+    t.string "task_date"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
