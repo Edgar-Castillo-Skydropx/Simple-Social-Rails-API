@@ -1,5 +1,5 @@
 class JsonWebToken
-    JWT_SECRET_KEY = Rails.application.credentials.dig(:secret_key_base)
+    JWT_SECRET_KEY = ENV.fetch("SECRET_KEY_BASE")
 
     def self.encode(payload, exp = 12.hours.from_now)
       payload[:exp] = exp.to_i

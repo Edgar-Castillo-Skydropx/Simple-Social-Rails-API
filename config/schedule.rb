@@ -18,13 +18,11 @@
 # end
 
 set :output, "log/cron.log" # Opcional, para registrar errores y salidas
-set :environment, "development"
 set :bundle_command, "bundle exec"
 
 env :PATH, ENV["PATH"] # Asegúrate de tener acceso a binarios como bundle
 
 every 1.minutes do
-  runner "puts 'Hello World'"
-  # rake "jobs:update_task"
+  rake "jobs:update_task"
 end
 # Learn more: http://github.com/javan/whenever

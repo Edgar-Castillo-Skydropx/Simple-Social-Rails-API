@@ -10,8 +10,12 @@ services:
       dockerfile: Dockerfile
       args:
         PORT: ${PROJECT_PORT}
+    environment:
+      - VISUAL=nano
+      - RAILS_ENV=production
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
     ports:
-      - ${PROJECT_PORT}:${PROJECT_PORT}
+      - "${PROJECT_PORT}:${PROJECT_PORT}"
     networks:
       - social-api
     depends_on:
