@@ -45,11 +45,28 @@ FROM base
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails
 
-# Run and own only the runtime files as a non-root user for security
+# Crear grupo y usuario rails
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
-USER 1000:1000
+
+# Cambiar el usuario a rails para el resto de los comandos
+USER rails
+
+# Ejecutar cron como root para poder escribir en /var/run
+USER root
+
+# Asegurarse de que cron pueda escribir en /var/run
+RUN mkdir -p /var/run/crond && chmod 755 /var/run/crond
+
+# Create empty crontab file
+RUN crontab -l | { cat; echo ""; } | crontab -
+
+# Update crontab file using whenever command
+RUN bundle exec whenever --update-crontab --set environment='production'
+
+# Cambiar de nuevo a rails para ejecutar la aplicación
+USER rails
 
 # Entrypoint prepares the database.
 COPY docker-entrypoint.sh /usr/bin/docker-entrypoint
