@@ -56,10 +56,14 @@ RUN groupadd --system --gid 1000 rails && \
 USER 1000:1000
 
 # Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+COPY docker-entrypoint.sh /usr/bin/docker-entrypoint
+ENTRYPOINT ["docker-entrypoint"]
 
-# Start the server by default, this can be overwritten at runtime
+# Start cron and the Rails server
 ARG PORT
 ENV PORT=${PORT}
 EXPOSE ${PORT}
-CMD ["./bin/rails", "server"]
+
+# CMD launches both cron and the Rails server
+#CMD ["sh", "-c", "cron && ./bin/rails server"]
+CMD ["sh", "-c", "./bin/rails server"]
