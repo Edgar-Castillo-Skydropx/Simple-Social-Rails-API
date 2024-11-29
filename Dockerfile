@@ -1,11 +1,7 @@
 # syntax = docker/dockerfile:1
 
-# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t my-app .
-# docker run -d -p 80:80 -p 443:443 --name my-app -e RAILS_MASTER_KEY=<value from config/master.key> my-app
-
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.2.2
+
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
@@ -13,7 +9,7 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client cron && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
@@ -59,11 +55,10 @@ USER 1000:1000
 COPY docker-entrypoint.sh /usr/bin/docker-entrypoint
 ENTRYPOINT ["docker-entrypoint"]
 
-# Start cron and the Rails server
+# Start the Rails server
 ARG PORT
 ENV PORT=${PORT}
 EXPOSE ${PORT}
 
-# CMD launches both cron and the Rails server
-#CMD ["sh", "-c", "cron && ./bin/rails server"]
+# CMD launches both the Rails server
 CMD ["sh", "-c", "./bin/rails server"]

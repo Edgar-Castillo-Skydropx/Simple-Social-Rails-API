@@ -18,10 +18,10 @@ services:
       - "${PROJECT_PORT}:${PROJECT_PORT}"
     networks:
       - social-api
+    volumes:
+      - ./logs:/rails/log
     depends_on:
       - postgres
-    volumes:
-      - ./logs:/app/logs
     logging:
       driver: "local"
 
