@@ -1,0 +1,1 @@
+* * * * * /bin/bash -l -c 'cd /rails && bundle exec rake jobs:update_task RAILS_ENV=production >> log/cron.log 2>&1'
