@@ -49,3 +49,5 @@ end
 
 
 gem "jwt", "~> 2.9"
+
+gem "karafka", ">= 2.4.0"

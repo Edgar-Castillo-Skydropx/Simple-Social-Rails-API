@@ -60,10 +60,10 @@ USER root
 RUN mkdir -p /var/run/crond && chmod 755 /var/run/crond
 
 # Create empty crontab file
-RUN crontab -l | { cat; echo ""; } | crontab -
+#RUN crontab -l | { cat; echo ""; } | crontab -
 
 # Update crontab file using whenever command
-RUN bundle exec whenever --update-crontab --set environment='production'
+#RUN bundle exec whenever --update-crontab --set environment='production'
 
 # Cambiar de nuevo a rails para ejecutar la aplicación
 USER rails

@@ -32,3 +32,9 @@ Things you may want to cover:
 - crontab -l
 - RAILS_ENV=production rails db:create db:migrate
 - RAILS_ENV=production rails assets:precompile
+
+## KARAFKA
+
+- bundle add karafka --version ">= 2.4.0"
+- bundle exec karafka install
+- karafka g consumer SimpleConsumer

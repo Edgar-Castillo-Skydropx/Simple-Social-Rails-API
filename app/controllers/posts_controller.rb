@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :validate_post_params, only: [ :create ]
 
+  TOPIC_NAME = "post_notifications"
+
   def create
     if @post = @user.posts.create(post_params)
       render json: { post: @post.as_json }
@@ -10,6 +12,7 @@ class PostsController < ApplicationController
   end
 
   def index
+    MessagePublisher.call({ date: Time.now.strftime("%d/%m/%Y %H:%M") }, TOPIC_NAME)
     render json: { users: @user.posts.all.map(&:as_json) }
   end
 

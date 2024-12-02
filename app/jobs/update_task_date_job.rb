@@ -1,8 +1,8 @@
 class UpdateTaskDateJob < ApplicationJob
   queue_as :default
 
-  def perform
+  def perform(date)
     puts "EXECUTING UPDATE_TASK CRON_JOB..."
-    Post.update_all(task_date: Time.now.strftime("%d/%m/%Y %H:%M"))
+    Post.update_all(task_date: date)
   end
 end
