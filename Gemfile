@@ -46,8 +46,12 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-
-
 gem "jwt", "~> 2.9"
 
 gem "karafka", ">= 2.4.0"
+
+## TAPIOCA AND SORBET LIBS
+
+gem 'sorbet', :group => :development
+gem 'sorbet-runtime'
+gem 'tapioca', require: false, :group => [:development, :test]

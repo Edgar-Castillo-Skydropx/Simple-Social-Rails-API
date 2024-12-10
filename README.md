@@ -38,3 +38,13 @@ Things you may want to cover:
 - bundle add karafka --version ">= 2.4.0"
 - bundle exec karafka install
 - karafka g consumer SimpleConsumer
+- bundle exec karafka server
+
+## TAPIOCA
+
+- bundle exec tapioca init
+- bin/tapioca dsl
+
+## VALIDATE SORBET TYPES
+
+- srb tc
