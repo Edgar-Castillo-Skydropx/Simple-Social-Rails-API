@@ -113,7 +113,7 @@ GEM
     json (2.8.2)
     json-schema (5.1.0)
       addressable (~> 2.8)
-    jwt (2.9.3)
+    jwt (2.10.1)
       base64
     karafka (2.4.14)
       base64 (~> 0.2)
@@ -310,7 +310,7 @@ DEPENDENCIES
   debug
   dotenv-rails
   json-schema
-  jwt (~> 2.9)
+  jwt (~> 2.10)
   karafka (>= 2.4.0)
   pg (~> 1.1)
   pry-rails (~> 0.3.11)

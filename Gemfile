@@ -46,7 +46,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-gem "jwt", "~> 2.9"
+gem "jwt", "~> 2.10"
 
 gem "karafka", ">= 2.4.0"
 
